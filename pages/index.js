@@ -1,11 +1,16 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
 import { Inter } from 'next/font/google'
+import Header from '../components/Header'
+import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
   return (
     <>
       <Head>
@@ -14,12 +19,17 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <Header />
       <main className=''>
         <div className='flex flex-col justify-center items-center h-screen'>
           <h1 className='text-6xl font-bold text-slate-900'>Logic</h1>
           <h3 className='text-2xl mt-8 text-slate-900'>
             Next.js, TailwindCSS,
           </h3>
+
+          <Link href='/home'>
+            <button>Go to Some Component</button>
+          </Link>
         </div>
       </main>
     </>
