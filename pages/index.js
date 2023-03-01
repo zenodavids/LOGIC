@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
-import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
@@ -19,18 +19,28 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Header />
-      <main className=''>
-        <div className='flex flex-col justify-center items-center h-screen'>
+      <Navbar />
+      <main className='flex flex-col justify-center items-center h-screen'>
+        {session && (
+          <>
+            <p style={{ marginBottom: '10px' }}>
+              Welcome, {session.user.name ?? session.user.email}
+            </p>
+          </>
+        )}
+        {!session && (
+          <>
+            <h1 className='text-6xl font-bold text-slate-900'>Logic</h1>
+            <h3 className='text-2xl mt-8 text-slate-900'>please sign in</h3>
+          </>
+        )}
+        {/* <div className='flex flex-col justify-center items-center h-screen'>
           <h1 className='text-6xl font-bold text-slate-900'>Logic</h1>
           <h3 className='text-2xl mt-8 text-slate-900'>
             Next.js, TailwindCSS,
           </h3>
 
-          <Link href='/home'>
-            <button>Go to Some Component</button>
-          </Link>
-        </div>
+        </div> */}
       </main>
     </>
   )

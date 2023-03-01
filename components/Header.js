@@ -16,17 +16,18 @@ export default function Header() {
 
   return (
     <div className='header'>
-      <Link href='/'>NextAuth.js</Link>
-      {session && (
-        <a href='#' onClick={handleSignout} className='btn-signin'>
-          Sign out
-        </a>
-      )}
-      {!session && (
-        <a href='#' onClick={handleSignin} className='btn-signin'>
-          Sign in
-        </a>
-      )}
+      <Link href='/'>
+        {session && (
+          <a href='#' onClick={handleSignout}>
+            Sign out
+          </a>
+        )}
+        {!session && (
+          <a href='#' onClick={handleSignin}>
+            Sign in
+          </a>
+        )}
+      </Link>
     </div>
   )
 }
